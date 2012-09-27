@@ -54,6 +54,8 @@
 
 #define PROC_DIR "/proc"
 
+int disable_scanning = 0;
+
 static void iscsi_login_timedout(void *data);
 static int iscsi_sched_ev_context(struct iscsi_ev_context *ev_context,
 				  struct iscsi_conn *conn, unsigned long tmo,
@@ -980,6 +982,11 @@ static void session_scan_host(struct iscsi_session *session, int hostno,
 			      queue_task_t *qtask)
 {
 	pid_t pid;
+
+	if (disable_scanning) {
+		mgmt_ipc_write_rsp(qtask, ISCSI_SUCCESS);
+		return;
+	}
 
 	pid = iscsi_sysfs_scan_host(hostno, 1);
 	if (pid == 0) {

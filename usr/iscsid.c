@@ -71,6 +71,7 @@ static struct option const long_options[] = {
 	{"gid", required_argument, NULL, 'g'},
 	{"no-pid-file", no_argument, NULL, 'n'},
 	{"pid", required_argument, NULL, 'p'},
+	{"no-scanning", no_argument, NULL, 's'},
 	{"help", no_argument, NULL, 'h'},
 	{"version", no_argument, NULL, 'v'},
 	{NULL, 0, NULL, 0},
@@ -93,6 +94,7 @@ Open-iSCSI initiator daemon.\n\
   -g, --gid=gid           run as gid, default is current user group\n\
   -n, --no-pid-file       do not use a pid file\n\
   -p, --pid=pidfile       use pid file (default " PID_FILE ").\n\
+  -s, --no-scanning       disable scanning of hosts\n\
   -h, --help              display this help and exit\n\
   -v, --version           display version and exit\n\
 ");
@@ -375,6 +377,9 @@ int main(int argc, char *argv[])
 			break;
 		case 'p':
 			pid_file = optarg;
+			break;
+		case 's':
+			disable_scanning = 1;
 			break;
 		case 'v':
 			printf("%s version %s\n", program_name,

@@ -263,6 +263,8 @@ typedef struct iscsi_session {
 	queue_task_t *notify_qtask;
 } iscsi_session_t;
 
+extern int disable_scanning;
+
 /* login.c */
 
 #define ISCSI_SESSION_TYPE_NORMAL 0
