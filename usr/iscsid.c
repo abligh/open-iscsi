@@ -351,7 +351,7 @@ int main(int argc, char *argv[])
 	int control_fd;
 	pid_t pid;
 
-	while ((ch = getopt_long(argc, argv, "c:i:fd:nu:g:p:vh", long_options,
+	while ((ch = getopt_long(argc, argv, "c:i:fd:nu:g:p:svh", long_options,
 				 &longindex)) >= 0) {
 		switch (ch) {
 		case 'c':
